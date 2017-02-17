@@ -1,0 +1,25 @@
+{
+  "name": "simple-nodejs-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yWebDev/simple-nodejs-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yWebDev/simple-nodejs-app/issues"
+  },
+  "homepage": "https://github.com/yWebDev/simple-nodejs-app#readme",
+  "dependencies": {
+    "ejs": "*",
+    "express": "3.3.8",
+    "nconf": "^0.8.4",
+    "winston": "^2.3.1"
+  }
+}
