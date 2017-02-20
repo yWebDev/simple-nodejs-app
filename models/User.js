@@ -1,6 +1,6 @@
 "use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require('libs/dbConnect');
 const crypto = require('crypto');
 const log = require('libs/log')(module);
 const userSchema = new mongoose.Schema({

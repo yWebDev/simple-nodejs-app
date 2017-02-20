@@ -6,6 +6,7 @@ const path = require('path');
 const config = require('config');
 const log = require('libs/log')(module);
 const loggerFormat = require('libs/loggerFormat');
+const HttpError = require('error/HttpError');
 const app = express();
 
 app.engine('ejs', engine);
@@ -25,10 +26,13 @@ app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use((req, res) => {
-  res.send(404, 'Page Not Found');
-});
+app.use(require('middlewares/sendHttpError'));
 app.use((err, req, res, next) => {
+  if (err instanceof HttpError) {
+    res.sendHttpError(err);
+    return;
+  }
+
   if (app.get('env') === 'development') {
     const errorHandler = express.errorHandler();
     errorHandler(err, req, res, next);
@@ -37,11 +41,7 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'Node App'
-  })
-});
+require('routes')(app);
 
 app.listen(config.get('port'), () => {
   log.info(`Server started at port ${config.get('port')}`);

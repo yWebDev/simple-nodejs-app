@@ -52,7 +52,7 @@ const createUsers = () => {
   prev.then(next)
 ), Promise.resolve())
   .then(() => {
-    mongoose.disconnect();
+    // mongoose.disconnect();
   })
   .catch((err) => {
     log.error(err.toString());
