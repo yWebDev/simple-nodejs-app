@@ -18,6 +18,7 @@
   "homepage": "https://github.com/yWebDev/simple-nodejs-app#readme",
   "dependencies": {
     "ejs": "*",
+    "ejs-locals": "^1.0.2",
     "express": "3.3.8",
     "nconf": "^0.8.4",
     "winston": "^2.3.1"

@@ -41,3 +41,6 @@ jspm_packages
 
 # modules
 node_modules
+
+#db
+data
