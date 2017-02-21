@@ -2,6 +2,7 @@
 
 const User = require('models/User');
 const HttpError = require('error/HttpError');
+const ObjectId = require('libs/dbConnect').Types.ObjectId;
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
@@ -19,7 +20,15 @@ module.exports = (app) => {
   });
 
   app.get('/user/:id', (req, res, next) => {
-    User.findById(req.params.id).then((user) => {
+    let id;
+    try {
+      id = ObjectId(req.params.id);
+    } catch (err) {
+      next(new HttpError(404, 'User not found'));
+      return;
+    }
+
+    User.findById(id).then((user) => {
       if (!user) {
         next(new HttpError(404, 'User not found'));
         return;

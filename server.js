@@ -14,6 +14,7 @@ app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(require('middlewares/sendHttpError'));
 app.use(express.favicon());
 
 if (app.get('env') === 'development') {
@@ -24,9 +25,8 @@ if (app.get('env') === 'development') {
 
 app.use(express.bodyParser());
 app.use(express.cookieParser());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(require('middlewares/sendHttpError'));
+app.use('/', app.router);
+app.use(express.static(path.join(__dirname, '/public')));
 app.use((err, req, res, next) => {
   if (err instanceof HttpError) {
     res.sendHttpError(err);
