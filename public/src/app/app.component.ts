@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
   title = 'app works!!!';
   ngOnInit(): void {
-    console.log(this.userService.getUserInfo());
+    this.userService.getUsers()
+      .then(users => console.log(users));
   }
 }
