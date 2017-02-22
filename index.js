@@ -17,11 +17,11 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const app = express();
 
-app.use(serveFavicon(path.join(__dirname, '../client/dist/favicon.ico')));
 
 if (app.get('env') === 'development') {
   app.use(logger('dev', loggerFormat));
 } else {
+  app.use(serveFavicon(path.join(__dirname, 'public/dist/favicon.ico')));
   app.use(logger('default'));
 }
 
@@ -35,7 +35,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-app.use(serveStatic(path.join(__dirname, '../client/dist')));
+app.use(serveStatic(path.join(__dirname, 'public/dist')));
 app.use((err, req, res, next) => {
   if (app.get('env') === 'development') {
     errorHandler(err, req, res, next);
@@ -44,7 +44,7 @@ app.use((err, req, res, next) => {
   }
 });
 app.get('/', (req, res) => {
-  res.sendfile(path.join(__dirname, '../client/dist/index.html'))
+  res.sendfile(path.join(__dirname, 'public/dist/index.html'))
 });
 app.use('/api', require('routes'));
 
