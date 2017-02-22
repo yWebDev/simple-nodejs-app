@@ -5,12 +5,13 @@ import { HttpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
+import { LoginPageComponent } from './views/login-page/login-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UserService } from './services/user/user.service';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import Routes from './app.routes.module';
+import { HomePageComponent } from './views/home-page/home-page.component';
+import Routes from './routes/routes.module';
+import { RegisterPageComponent } from './views/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import Routes from './app.routes.module';
     LoginPageComponent,
     HeaderComponent,
     FooterComponent,
-    HomePageComponent
+    HomePageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,
