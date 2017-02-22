@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { User } from 'app/classes/user'
+import { User } from 'app/classes/user';
+import { UserService } from 'app/services/user/user.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,10 +10,12 @@ import { User } from 'app/classes/user'
 })
 export class LoginPageComponent {
 
+  constructor(private userService: UserService) {}
+
   model = new User();
 
   onSubmit() {
-    console.log(this.model);
+    this.userService.login(this.model);
   }
 
 }

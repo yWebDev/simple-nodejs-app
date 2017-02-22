@@ -34,4 +34,11 @@ router.get('/user/:id', (req, res, next) => {
   })
 });
 
+router.post('/login', (req, res, next) => {
+  res.json({
+    username: req.body.username,
+    password: req.body.password,
+  });
+});
+
 module.exports = router;
