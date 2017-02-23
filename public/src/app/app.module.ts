@@ -12,6 +12,7 @@ import { UserService } from './services/user/user.service';
 import { HomePageComponent } from './views/home-page/home-page.component';
 import Routes from './routes/routes.module';
 import { RegisterPageComponent } from './views/register-page/register-page.component';
+import { AuthService } from 'app/services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RegisterPageComponent } from './views/register-page/register-page.compo
     RouterModule.forRoot(Routes)
   ],
   providers: [
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

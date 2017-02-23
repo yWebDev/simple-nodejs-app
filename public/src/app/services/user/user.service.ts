@@ -13,14 +13,14 @@ export class UserService {
 
   constructor(private http: Http) {}
 
-  getUsers(): Promise<User> {
+  getUsers(): Promise<any> {
     return this.http.get(this.userUrl)
       .toPromise()
       .then(response => response.json() as User[])
       .catch(this.handleError);
   }
 
-  login(user): Promise<User> {
+  login(user): Promise<any> {
     return this.http.post(this.loginUrl, user)
       .toPromise()
       .then(response => response.json() as User)

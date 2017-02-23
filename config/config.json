@@ -12,5 +12,6 @@
       "secure": false,
       "maxAge": null
     }
-  }
+  },
+  "secret": "sgrferwe334eraw)232+22_34as!4"
 }

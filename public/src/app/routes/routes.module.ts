@@ -1,6 +1,7 @@
 import { HomePageComponent } from 'app/views/home-page/home-page.component';
 import { LoginPageComponent } from 'app/views/login-page/login-page.component';
 import { RegisterPageComponent } from 'app/views/register-page/register-page.component';
+import { AuthService } from 'app/services/auth/auth.service';
 
 export default [
   {
@@ -18,11 +19,12 @@ export default [
   },
   {
     path: 'home',
-    component: HomePageComponent
+    component: HomePageComponent,
+    canActivate: [AuthService]
   },
   {
     path: '**',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   }
 ];

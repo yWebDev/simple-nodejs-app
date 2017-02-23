@@ -1,6 +1,8 @@
 "use strict";
 
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const router = express.Router();
 const User = require('models/User');
 const HttpError = require('error/HttpError');
@@ -35,9 +37,19 @@ router.get('/user/:id', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  res.json({
-    username: req.body.username,
-    password: req.body.password,
+  const username = req.body.username;
+  const password = req.body.password;
+
+  User.findOne({username}).then(user => {
+    if (user && user.checkPassword(password)) {
+      const token = jwt.sign(user, config.get('secret'));
+
+      res.json(200, { token });
+    } else {
+      res.sendStatus(403);
+    }
+  }).catch((err) => {
+    next(err);
   });
 });
 
