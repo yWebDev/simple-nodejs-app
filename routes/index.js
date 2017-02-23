@@ -40,14 +40,41 @@ router.post('/login', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  User.findOne({username}).then(user => {
+  User.findOne({ username }).then(user => {
     if (user && user.checkPassword(password)) {
       const token = jwt.sign(user, config.get('secret'));
 
-      res.json(200, { token });
+      res.json({ token });
     } else {
       res.sendStatus(403);
     }
+  }).catch((err) => {
+    next(err);
+  });
+});
+
+router.post('/register', (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  User.findOne({ username }).then(user => {
+    if (user) {
+      res.sendStatus(404);
+      return;
+    }
+
+    const newUser = new User({
+      username,
+      password
+    });
+
+    newUser.save().then(user => {
+      const token = jwt.sign(user, config.get('secret'));
+
+      res.status(201).json({ token });
+    }).catch((err) => {
+      next(err);
+    });
   }).catch((err) => {
     next(err);
   });

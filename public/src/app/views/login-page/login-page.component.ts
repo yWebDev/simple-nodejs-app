@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { User } from 'app/classes/user';
 import { UserService } from 'app/services/user/user.service';
+import { AuthService } from 'app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,18 +11,18 @@ import { UserService } from 'app/services/user/user.service';
 })
 export class LoginPageComponent {
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService,
+              private auth: AuthService) {}
 
   model = new User();
 
   onSubmit() {
     this.userService.login(this.model).then(res => {
       if (res && res.token) {
-        localStorage.setItem('sa-utoken', res.token);
-        this.router.navigate(['/home']);
+        this.auth.login(res.token);
       }
     }).catch(err => {
-      console.log(err);
+      console.error(err);
     });
   }
 

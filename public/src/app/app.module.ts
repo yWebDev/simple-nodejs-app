@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { LoginPageComponent } from './views/login-page/login-page.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { UserService } from './services/user/user.service';
-import { HomePageComponent } from './views/home-page/home-page.component';
-import Routes from './routes/routes.module';
-import { RegisterPageComponent } from './views/register-page/register-page.component';
-import { AuthService } from 'app/services/auth/auth.service';
+import { AppComponent } from 'app/app.component';
+import { LoginPageComponent } from 'app/views/login-page/login-page.component';
+import { HeaderComponent } from 'app/components/header/header.component';
+import { FooterComponent } from 'app/components/footer/footer.component';
+import { UserService } from 'app/services/user/user.service';
+import { HomePageComponent } from 'app/views/home-page/home-page.component';
+import Routes from 'app/routes/routes.module';
+import { RegisterPageComponent } from 'app/views/register-page/register-page.component';
+import { AuthService, LoginActivateService } from 'app/services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { AuthService } from 'app/services/auth/auth.service';
   ],
   providers: [
     UserService,
-    AuthService
+    AuthService,
+    LoginActivateService
   ],
   bootstrap: [AppComponent]
 })

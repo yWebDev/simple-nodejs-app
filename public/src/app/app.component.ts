@@ -9,7 +9,6 @@ import { UserService } from './services/user/user.service';
 })
 export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
-  title = 'app works!!!';
   ngOnInit(): void {
     this.userService.getUsers()
       .then(users => console.log(users));

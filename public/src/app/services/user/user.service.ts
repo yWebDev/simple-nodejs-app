@@ -10,6 +10,7 @@ export class UserService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private userUrl = 'api/user';
   private loginUrl = 'api/login';
+  private registerUrl = 'api/register';
 
   constructor(private http: Http) {}
 
@@ -22,6 +23,13 @@ export class UserService {
 
   login(user): Promise<any> {
     return this.http.post(this.loginUrl, user)
+      .toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
+  }
+
+  register(user): Promise<any> {
+    return this.http.post(this.registerUrl, user)
       .toPromise()
       .then(response => response.json() as User)
       .catch(this.handleError);
